@@ -1,0 +1,17 @@
+{
+    "name": "iqbal/php-ci-demo",
+    "description": "A simple PHP OOP project with PHPUnit tests and CI workflow",
+    "require-dev": {
+        "phpunit/phpunit": "^12.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Iqbal\\PhpCiDemo\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.3.17"
+        }
+    }
+}
