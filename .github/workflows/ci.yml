@@ -1,0 +1,37 @@
+name: PHP CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup PHP
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      # 3️⃣ Install Composer dependencies
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-suggest
+
+      # 4️⃣ Dump Autoload (PSR-4)
+      - name: Composer Autoload
+        run: composer dump-autoload
+
+      # 5️⃣ Run PHPUnit tests
+      - name: Run PHPUnit Tests
+        run: vendor/bin/phpunit --colors=always tests
+
+      # 6️⃣ Optional: Run raw PHP test (if not using PHPUnit)
+      - name: Run Raw PHP Test
+        run: php tests/CalculatorTest.php
