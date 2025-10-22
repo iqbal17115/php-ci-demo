@@ -1,19 +1,41 @@
 <?php
+namespace App\Tests;
 
-require_once __DIR__ . '/../src/Calculator.php';
-
+use PHPUnit\Framework\TestCase;
 use App\Calculator;
 
-$calc = new Calculator();
+require __DIR__ . '/../vendor/autoload.php';
 
-try {
-    assert($calc->add(2, 3) === 5);
-    assert($calc->subtract(5, 2) === 3);
-    assert($calc->multiply(3, 4) === 12);
-    assert($calc->divide(10, 2) === 5);
+class CalculatorTest extends TestCase
+{
+    public function testAdd()
+    {
+        $calc = new Calculator();
+        $this->assertEquals(5, $calc->add(2, 3));
+    }
 
-    echo "All tests passed successfully!\n";
-} catch (AssertionError $e) {
-    echo "Test failed: " . $e->getMessage() . "\n";
-    exit(1);
+    public function testSubtract()
+    {
+        $calc = new Calculator();
+        $this->assertEquals(3, $calc->subtract(5, 2));
+    }
+
+    public function testMultiply()
+    {
+        $calc = new Calculator();
+        $this->assertEquals(12, $calc->multiply(3, 4));
+    }
+
+    public function testDivide()
+    {
+        $calc = new Calculator();
+        $this->assertEquals(5, $calc->divide(10, 2));
+    }
+
+    public function testDivideByZero()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $calc = new Calculator();
+        $calc->divide(5, 0);
+    }
 }

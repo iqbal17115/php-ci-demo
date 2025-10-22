@@ -1,6 +1,5 @@
 <?php
-
-require_once __DIR__ . '/src/Calculator.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use App\Calculator;
 
